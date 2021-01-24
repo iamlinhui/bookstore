@@ -43,10 +43,7 @@ func main() {
 	http.HandleFunc("/getOrderInfo", controller.GetOrderInfo)
 	http.HandleFunc("/sendOrder", controller.SendOrder)
 	http.HandleFunc("/takeOrder", controller.TakeOrder)
-
-	////获取SSL 证书和 RSA 私钥
-	//utils.GetTLS("utils/pem/cert.pem","utils/pem/key.pem")
-
+	
 	//设置服务器路径,使用默认多路服务器
 	http.ListenAndServe("127.0.0.1:8080", nil)
 
