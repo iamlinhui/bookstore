@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bookstores2/controller"
+	"bookstores/controller"
 	"net/http"
 )
 
@@ -43,7 +43,7 @@ func main() {
 	http.HandleFunc("/getOrderInfo", controller.GetOrderInfo)
 	http.HandleFunc("/sendOrder", controller.SendOrder)
 	http.HandleFunc("/takeOrder", controller.TakeOrder)
-	
+
 	//设置服务器路径,使用默认多路服务器
 	http.ListenAndServe("127.0.0.1:8080", nil)
 

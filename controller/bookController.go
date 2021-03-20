@@ -1,8 +1,8 @@
 package controller
 
 import (
-    "bookstores2/dao"
-    "bookstores2/model"
+	"bookstores/dao"
+	"bookstores/model"
 	"fmt"
 	"html/template"
 	"net/http"

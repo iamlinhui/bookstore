@@ -1,9 +1,9 @@
 package controller
 
 import (
-    "bookstores2/dao"
-    "bookstores2/model"
-    "bookstores2/utils"
+	"bookstores/dao"
+	"bookstores/model"
+	"bookstores/utils"
 	"html/template"
 	"net/http"
 	"strconv"

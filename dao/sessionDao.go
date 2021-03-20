@@ -1,8 +1,8 @@
 package dao
 
 import (
-    "bookstores2/model"
-    "bookstores2/utils"
+	"bookstores/model"
+	"bookstores/utils"
 	"fmt"
 	"net/http"
 )
