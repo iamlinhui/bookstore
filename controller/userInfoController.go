@@ -24,9 +24,9 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		//需要创建session
 		uuid := utils.CreateUUID()
 		session := &model.Session{
-			Session_id: uuid,
-			User_id:    uid,
-			Username:   username,
+			SessionId: uuid,
+			UserId:    uid,
+			Username:  username,
 		}
 		err := dao.AddSession(session)
 		if err != nil {

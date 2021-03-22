@@ -19,9 +19,9 @@ func AddSession(s *model.Session) error {
 		return err
 	}
 	//MD5 加密密码
-	s.Session_id = utils.Md5(s.Session_id)
+	s.SessionId = utils.Md5(s.SessionId)
 
-	_, errExec := stmt.Exec(s.Session_id, s.Username, s.User_id)
+	_, errExec := stmt.Exec(s.SessionId, s.Username, s.UserId)
 	if errExec != nil {
 		fmt.Println("执行出错,err:", errExec)
 		return errExec
@@ -70,7 +70,7 @@ func IsLogin(r *http.Request) (bool, *model.Session, error) {
 		session_id := utils.Md5(cookie.Value)
 
 		res := &model.Session{}
-		err := utils.Db.QueryRow(sqlStr, session_id).Scan(&res.Session_id, &res.User_id, &res.Username)
+		err := utils.Db.QueryRow(sqlStr, session_id).Scan(&res.SessionId, &res.UserId, &res.Username)
 		if err != nil {
 			fmt.Println("数据库中没查找到该session相关记录，err:", err)
 			return false, nil, err

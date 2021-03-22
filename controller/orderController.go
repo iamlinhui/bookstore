@@ -14,7 +14,7 @@ import (
 //结账成功，清空购物车。
 func Checkout(w http.ResponseWriter, r *http.Request) {
 	_, session, _ := dao.IsLogin(r)
-	cart, _ := dao.FindCartByUserId(session.User_id)
+	cart, _ := dao.FindCartByUserId(session.UserId)
 	uuid := utils.CreateUUID()
 
 	order := &model.Order{
@@ -23,7 +23,7 @@ func Checkout(w http.ResponseWriter, r *http.Request) {
 		TotalAmount: cart.GetTotalAmount(),
 		TotalCount:  cart.GetTotalCount(),
 		State:       0,
-		UserId:      session.User_id,
+		UserId:      session.UserId,
 	}
 	dao.AddOrder(order)
 
@@ -59,7 +59,7 @@ func Checkout(w http.ResponseWriter, r *http.Request) {
 //获取当前用户的订单
 func GetMyOrder(w http.ResponseWriter, r *http.Request) {
 	_, session, _ := dao.IsLogin(r)
-	orders, _ := dao.FindAllOrderByUserId(session.User_id)
+	orders, _ := dao.FindAllOrderByUserId(session.UserId)
 
 	session.Orders = orders
 	t := template.Must(template.ParseFiles("views/pages/order/order.html"))

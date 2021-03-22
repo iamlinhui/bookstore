@@ -22,7 +22,7 @@ func AddBook2Cart(w http.ResponseWriter, r *http.Request) {
 		bid, _ := strconv.Atoi(bookId)
 		book, _ := dao.FindBookById(bid)
 		//是否已经创建购物车
-		cart, _ := dao.FindCartByUserId(session.User_id)
+		cart, _ := dao.FindCartByUserId(session.UserId)
 		if cart == nil {
 			//未创建购物车
 			cartId := utils.CreateUUID()
@@ -35,7 +35,7 @@ func AddBook2Cart(w http.ResponseWriter, r *http.Request) {
 			cartItems = append(cartItems, cartItem)
 			cart = &model.Cart{
 				CartId:    cartId,
-				UserId:    session.User_id,
+				UserId:    session.UserId,
 				CartItems: cartItems,
 			}
 			cart.TotalCount = cart.GetTotalCount()
@@ -77,7 +77,7 @@ func AddBook2Cart(w http.ResponseWriter, r *http.Request) {
 func GetCartInfo(w http.ResponseWriter, r *http.Request) {
 	isLogin, session, _ := dao.IsLogin(r)
 	if isLogin {
-		cart, _ := dao.FindCartByUserId(session.User_id)
+		cart, _ := dao.FindCartByUserId(session.UserId)
 		session.Cart = cart
 		//解析模板文件
 		t := template.Must(template.ParseFiles("views/pages/cart/cart.html"))
@@ -106,7 +106,7 @@ func DeleteCartItem(w http.ResponseWriter, r *http.Request) {
 	dao.DeleteCartItemByCartItemId(cId)
 	//删除之后更新购物车信息
 	_, session, _ := dao.IsLogin(r)
-	cart, _ := dao.FindCartByUserId(session.User_id)
+	cart, _ := dao.FindCartByUserId(session.UserId)
 	cartItems := cart.CartItems
 	for i, v := range cartItems {
 		//从结构体中移除已经删除的购物项
@@ -131,7 +131,7 @@ func UpdateCartItem(w http.ResponseWriter, r *http.Request) {
 	bookCount, _ := strconv.ParseInt(bCount, 10, 64)
 
 	_, session, _ := dao.IsLogin(r)
-	cart, _ := dao.FindCartByUserId(session.User_id)
+	cart, _ := dao.FindCartByUserId(session.UserId)
 
 	cartItem, _ := dao.FindCartItemById(bookId, cartId)
 	//已经创建该购物项 ，购物车内购物项图书数量直接写入即可

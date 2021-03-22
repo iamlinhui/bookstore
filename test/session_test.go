@@ -10,9 +10,9 @@ import (
 
 func TestAddSession(t *testing.T) {
 	s := &model.Session{
-		Session_id: utils.CreateUUID(),
-		Username:   "jack",
-		User_id:    16,
+		SessionId: utils.CreateUUID(),
+		Username:  "jack",
+		UserId:    16,
 	}
 	err := dao.AddSession(s)
 	if err != nil {
